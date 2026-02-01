@@ -1,0 +1,73 @@
+/* MAIN CONTACT SECTION */
+.contact {
+  padding: 80px 32px;   /* desktop default */
+  background-color: #fff;
+}
+
+/* Heading */
+.contact h1 {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+/* Text */
+.contact p {
+  color: #555;
+  margin-bottom: 32px;
+  max-width: 600px;
+}
+
+/* Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 480px;
+}
+
+/* Inputs */
+.contact-form input,
+.contact-form textarea {
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+}
+
+/* Button */
+.contact-form button {
+  padding: 12px;
+  border: none;
+  border-radius: 20px;
+  background: #000;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* ========================= */
+/* 📱 MOBILE (small screens) */
+/* ========================= */
+@media (max-width: 768px) {
+  .contact {
+    padding: 60px 16px;
+  }
+
+  .contact h1 {
+    font-size: 28px;
+  }
+
+  .contact p {
+    font-size: 14px;
+  }
+}
+
+/* ========================= */
+/* 💻 LARGE SCREENS */
+/* ========================= */
+@media (min-width: 1024px) {
+  .contact-form {
+    margin-left: 0;
+  }
+}

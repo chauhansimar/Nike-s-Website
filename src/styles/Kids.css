@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500;600&display=swap');
+
+/* =====================
+   KIDS HERO SPLIT
+===================== */
+
+.kids-hero-split {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 100vh; /* safer than 110vh */
+  overflow: hidden;
+}
+
+/* EACH HALF */
+.kids-hero-half {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* HERO IMAGES */
+.kids-hero-half img {
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  filter: brightness(1.05) contrast(1.05);
+  transition: transform 1.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* HOVER MOTION */
+.kids-hero-half:hover img {
+  transform: scale(1.08);
+}
+
+/* SUBTLE DARK OVERLAY */
+.kids-hero-half::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+/* =====================
+   HERO TEXT OVERLAY
+===================== */
+
+.kids-hero-content {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  padding: 0 16px 80px;
+  color: #fff;
+}
+
+.kids-hero-title {
+  font-family: "Anton", sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  letter-spacing: 1px;
+}
+
+.kids-hero-subtitle {
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
+.kids-hero-btn {
+  margin-top: 25px;
+  padding: 14px 34px;
+  background: #000;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.kids-hero-btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* =====================
+   KIDS PRODUCTS SECTION
+===================== */
+
+.kids {
+  padding: 100px 80px;
+  font-family: "Poppins", sans-serif;
+}
+
+.kids-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kids h1 {
+  font-size: 72px;
+}
+
+.kids-actions span {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.kids-subtext {
+  margin-bottom: 30px;
+  color: gray;
+}
+
+.kids-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 60px;
+}
+
+/* PRODUCT CARD */
+.kids-card {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kids-card img {
+  width: 100%;
+  background: #f5f5f5;
+  transition: transform 0.4s ease;
+}
+
+.kids-card:hover img {
+  transform: scale(1.08);
+}
+
+.kids-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* =====================
+   RESPONSIVE — MOBILE
+===================== */
+
+@media (max-width: 768px) {
+  .kids-hero-split {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .kids-hero-half {
+    width: 100%;
+    height: 50vh;
+  }
+
+  .kids-hero-half img {
+    height: 100%;
+  }
+
+  .kids-hero-content {
+    padding-bottom: 40px;
+  }
+
+  .kids h1 {
+    font-size: 40px;
+  }
+
+  .kids {
+    padding: 80px 20px;
+  }
+
+  .kids-grid {
+    gap: 32px;
+  }
+}
+
+/* =====================
+   RESPONSIVE — TABLET
+===================== */
+
+@media (max-width: 1024px) {
+  .kids h1 {
+    font-size: 56px;
+  }
+
+  .kids-grid {
+    gap: 40px;
+  }
+}

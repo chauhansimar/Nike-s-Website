@@ -1,0 +1,713 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* =====================
+   GLOBAL VARIABLES
+===================== */
+:root {
+  --red: #d81c28;
+  --grey: #2e2e2e;
+}
+
+
+
+
+/* =====================
+   GLOBAL RESET
+===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* =====================
+   HERO CONTAINER
+===================== */
+.nike-hero {
+  position: relative;
+  min-height: 90vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: 	#000000;
+  overflow: hidden;
+  background: linear-gradient(
+    to top,
+    rgba(28, 28, 28, 0.954),
+    rgba(66, 66, 66, 0.555),
+    rgb(255, 252, 252),
+    rgba(247, 241, 241, 0.221)
+  );
+}
+
+/* =====================
+   IMAGE LAYER
+===================== */
+.nike-hero-image {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.nike-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: heroFloat 3s ease-in-out infinite;
+  filter: contrast(1.05) saturate(1.05);
+}
+
+
+@keyframes heroFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+  100% { transform: translateY(0); }
+}
+
+/* =====================
+   DARK GRADIENT OVERLAY
+===================== */
+.nike-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9),
+    rgba(0, 0, 0, 0.65),
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+
+/* =====================
+   CONTENT
+===================== */
+.nike-hero-content {
+  position: absolute;
+  bottom: 80px;
+  z-index: 3;
+  text-align: center;
+  max-width: 720px;
+  padding: 0 20px;
+  animation: fadeUp 3s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =====================
+   TEXT STYLES (WHITE)
+===================== */
+.nike-hero-tag {
+  font-size: 16px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 12px;
+  display: block;
+ text-shadow:
+  0 5px 10px rgba(0, 0, 0, 0.45),
+  0 5px 10px rgba(0, 0, 0, 0.35);
+
+}
+
+.nike-hero-title {
+  font-family: 'Anton', sans-serif;
+  font-size: 50px;
+  line-height: 1;
+  letter-spacing: 0px;
+  margin-bottom: 5px;
+  color: #ffffff;
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.9);
+}
+
+.nike-hero-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 28px;
+}
+
+/* =====================
+   BUTTONS
+===================== */
+.nike-hero-buttons {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+}
+
+.nike-btn {
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.nike-btn.primary {
+  background: #ffffff;
+  color: #000000;
+
+}
+
+.nike-btn.primary:hover {
+  background: #ffffff;
+  color: #000000;
+  
+}
+
+.nike-btn.secondary {
+ background: #ffffff;
+  color: #000000;
+}
+
+.nike-btn.secondary:hover {
+  background: #ffffff;
+  color: #000000;
+  
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+@media (max-width: 768px) {
+  .nike-hero-title {
+    font-size: 42px;
+  }
+
+  .nike-hero-content {
+    bottom: 40px;
+  }
+}
+
+
+
+button {
+  all: unset;
+  padding: 6px 16px;
+  background: var(--red);
+  height: 32px;
+  color: white;
+  font-weight: 500;
+}
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+}
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  height: 72px;
+  align-items: center;
+    padding: 12px 32px; 
+
+  background: #fff; /* REQUIRED */
+}
+
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 24px;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  height: calc(100vh - 72px);
+}
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+.hero h1 {
+  font-weight: 800;
+  line-height: 102px;
+  font-size: 108px;
+}
+.hero p {
+  font-weight: 600;
+  color: var(--gray);
+  max-width: 400px;
+}
+
+.hero-btn {
+  display: flex;
+  gap: 40px;
+}
+.hero-btn button {
+  font-size: 24px;
+}
+.secondary-btn {
+  background: transparent;
+  color: var(--grey);
+  border: 1px solid grey;
+}
+
+.shopping p {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.brand-icons {
+  display: flex;
+  gap: 16px;
+}
+nav ul li {
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+}
+
+nav ul li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0%;
+  height: 3px;
+  background: #000; 
+  transition: width 0.3s ease;
+}
+
+
+nav ul li:hover::after {
+  width: 100%;
+}
+
+button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(216, 28, 40, 0.35);
+}
+.contact {
+  padding: 80px 0;
+}
+
+.contact h1 {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.contact p {
+  margin-bottom: 32px;
+  max-width: 500px;
+}
+
+.contact-form {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.contact-form textarea {
+  resize: none;
+}
+
+.contact-form button {
+  width: fit-content;
+}
+
+/* =====================
+   DROPDOWN MENU
+===================== */
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 140%;
+  left: 0;
+  background: white;
+  min-width: 160px;
+  border-radius: 6px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  padding: 8px 0;
+  animation: fadeSlide 0.3s ease;
+  z-index: 1000;
+}
+
+.dropdown-menu li {
+  padding: 10px 16px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dropdown-menu li:hover {
+  background: #f4f4f4;
+}
+
+/* animation */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* =====================
+   MEN HERO SPLIT (MATCH WOMEN)
+===================== */
+
+.men-hero-split {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 100vh; /* ✅ SAME AS WOMEN */
+  overflow: hidden;
+}
+
+/* EACH HALF */
+.men-hero-half {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* HERO IMAGES */
+.men-hero-half img {
+  width: 100%;
+  height: 100%;            /* ✅ FIXED */
+  object-fit: cover;
+  filter: brightness(1.05) contrast(1.05);
+  transition: transform 1.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* HOVER MOTION */
+.men-hero-half:hover img {
+  transform: scale(1.08);
+}
+
+/* SUBTLE OVERLAY */
+.men-hero-half::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.22); /* ✅ SAME AS WOMEN */
+}
+
+/* =====================
+   HERO TEXT OVERLAY
+===================== */
+
+.men-hero-content {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  padding: 0 16px 90px; /* ✅ SAME AS WOMEN */
+  color: #fff;
+}
+
+.men-hero-title {
+  font-family: "Anton", sans-serif;
+  font-size: clamp(2.8rem, 6vw, 4.5rem); /* ✅ SAME SCALE */
+  letter-spacing: 1px;
+}
+
+.men-hero-subtitle {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* CTA BUTTON */
+.men-hero-btn {
+  margin-top: 25px;
+  padding: 14px 36px;
+  background: #000;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.men-hero-btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* =====================
+   MEN PRODUCTS SECTION (MATCH WOMEN)
+===================== */
+
+.men {
+  padding: 100px 80px; /* ✅ SAME */
+  margin-top: 80px;    /* ✅ SAME */
+  font-family: "Poppins", sans-serif;
+}
+
+.men-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px; /* ✅ SAME */
+}
+
+.men h1 {
+  font-size: 80px; /* ✅ SAME AS WOMEN */
+  margin-bottom: 10px;
+}
+
+.men-actions span {
+  margin-left: 20px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.men-actions span:hover {
+  text-decoration: underline;
+}
+
+.men-subtext {
+  margin-bottom: 30px;
+  color: gray;
+}
+
+/* GRID */
+.men-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* ✅ SAME */
+  gap: 64px; /* ✅ SAME */
+}
+
+/* =====================
+   MEN CARD (ALREADY NORMALIZED)
+===================== */
+
+.men-card {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.men-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #f5f5f5;
+  transition: transform 0.4s ease;
+}
+
+.men-card:hover img {
+  transform: scale(1.08);
+}
+
+.men-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* =====================
+   RESPONSIVE — TABLET
+===================== */
+
+@media (max-width: 1024px) {
+  .men h1 {
+    font-size: 64px; /* ✅ SAME */
+  }
+
+  .men-grid {
+    gap: 48px; /* ✅ SAME */
+  }
+}
+
+/* =====================
+   RESPONSIVE — MOBILE
+===================== */
+
+@media (max-width: 768px) {
+  .men-hero-split {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .men-hero-half {
+    width: 100%;
+    height: 50vh; /* ✅ SAME */
+  }
+
+  .men-hero-content {
+    padding-bottom: 40px; /* ✅ SAME */
+  }
+
+  .men {
+    padding: 80px 20px; /* ✅ SAME */
+  }
+
+  .men-grid {
+    gap: 36px; /* ✅ SAME */
+  }
+
+  .men h1 {
+    font-size: 48px;
+  }
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  margin: 0 auto; /* keeps links centered like before */
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-search {
+  width: 160px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.3);
+}
+.nav-icon {
+  font-size: 26px;          /* BIG */
+  font-weight: 5;         /* BOLD */
+  color: transparent;       /* TRANSPARENT TEXT */
+  -webkit-text-stroke: 0.3px #111; /* outline effect (clean & premium) */
+  cursor: pointer;
+  line-height: 1;
+    filter: grayscale(100%) brightness(0);
+}
+
+.nav-icon:hover {
+  -webkit-text-stroke: 0.2px #000;
+  transform: scale(1.08);
+  transition: all 0.2s ease;
+}
+
+/* =====================
+   NAVBAR RESPONSIVE
+===================== */
+
+.hamburger {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 16px;
+  }
+
+  /* Hide desktop links */
+  .nav-links {
+    position: absolute;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px 0;
+    display: none;
+    z-index: 999;
+  }
+
+  /* Show when active */
+  .nav-links.active {
+    display: flex;
+  }
+
+  /* Hide search */
+  .nav-search {
+    display: none;
+  }
+
+  /* Show hamburger */
+  .hamburger {
+    display: block;
+  }
+
+  /* Center items */
+  .nav-links li {
+    text-align: center;
+    font-size: 18px;
+  }
+
+  /* Adjust right side */
+  .nav-right {
+    gap: 12px;
+  }
+
+  /* Login button smaller */
+  .login-btn {
+    display: none;
+  }
+}
+/* =====================
+   GLOBAL RESPONSIVE HELPERS
+===================== */
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+.navbar {
+  width: 100%;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+  

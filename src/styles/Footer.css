@@ -1,0 +1,104 @@
+.nike-footer {
+  background: #000;
+  color: #fff;
+  padding: 60px 80px 30px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* MAIN LAYOUT */
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+
+/* BRAND */
+.footer-brand h2 {
+  font-family: "Anton", sans-serif;
+  letter-spacing: 2px;
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.footer-brand p {
+  color: #aaa;
+  font-size: 14px;
+  max-width: 280px;
+}
+
+/* LINKS */
+.footer-links {
+  display: flex;
+  gap: 80px;
+}
+
+.footer-links h4 {
+  font-size: 14px;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.footer-links li:hover {
+  color: #fff;
+}
+
+/* BOTTOM */
+.footer-bottom {
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid #222;
+  font-size: 12px;
+  color: #777;
+  text-align: center;
+}
+
+/* ========================= */
+/* 📱 MOBILE & TABLET */
+/* ========================= */
+@media (max-width: 768px) {
+  .nike-footer {
+    padding: 50px 20px 25px;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .footer-brand h2 {
+    font-size: 26px;
+  }
+
+  .footer-links h4 {
+    margin-bottom: 12px;
+  }
+}
+
+/* ========================= */
+/* 💻 LARGE DESKTOP */
+/* ========================= */
+@media (min-width: 1280px) {
+  .nike-footer {
+    padding: 70px 100px 30px;
+  }
+}
