@@ -1,18 +1,53 @@
 import { useEffect, useState } from "react";
 
-const USE_API = false; // 👈 change to true when you want API products
+const USE_API = false; // change to true if API needed
 
-const Men = () => {
+const Men = ({ onSelectProduct }) => {
   const [products, setProducts] = useState([]);
 
-  // Static fallback data (your original shoes)
   const staticShoes = [
-    { img: "shoe1.png", title: "Nike High Dunk", price: "₹ 19,999" },
-    { img: "shoe2.png", title: "Nike Downshifter", price: "₹ 7,499" },
-    { img: "shoe3.png", title: "Nike Air Force", price: "₹ 8,499" },
-    { img: "shoe4.png", title: "Nike Air Structure 26", price: "₹ 10,999" },
-    { img: "shoe5.jpeg", title: "Nike Dunk High", price: "₹ 11,499" },
-    { img: "shoe6.png", title: "Nike Zoom Haskbark Pro", price: "₹ 11,499" },
+    {
+      id: "men-1",
+      img: "shoe1.png",
+      title: "Nike High Dunk",
+      price: "₹ 19,999",
+      category: "Men's Shoes",
+    },
+    {
+      id: "men-2",
+      img: "shoe2.png",
+      title: "Nike Downshifter",
+      price: "₹ 7,499",
+      category: "Men's Shoes",
+    },
+    {
+      id: "men-3",
+      img: "shoe3.png",
+      title: "Nike Air Force",
+      price: "₹ 8,499",
+      category: "Men's Shoes",
+    },
+    {
+      id: "men-4",
+      img: "shoe4.png",
+      title: "Nike Air Structure 26",
+      price: "₹ 10,999",
+      category: "Men's Shoes",
+    },
+    {
+      id: "men-5",
+      img: "shoe5.jpeg",
+      title: "Nike Dunk High",
+      price: "₹ 11,499",
+      category: "Men's Shoes",
+    },
+    {
+      id: "men-6",
+      img: "shoe6.png",
+      title: "Nike Zoom Haskbark Pro",
+      price: "₹ 11,499",
+      category: "Men's Shoes",
+    },
   ];
 
   useEffect(() => {
@@ -20,36 +55,11 @@ const Men = () => {
       setProducts(staticShoes);
       return;
     }
-
-    // Optional API mode (FakeStore)
-    const fetchMenProducts = async () => {
-      try {
-        const res = await fetch(
-          "https://fakestoreapi.com/products/category/men's clothing"
-        );
-        const data = await res.json();
-
-        // Map API data to your card UI
-        const mapped = data.map((item) => ({
-          img: item.image,
-          title: item.title,
-          price: `₹ ${item.price}`,
-          isApi: true,
-        }));
-
-        setProducts(mapped);
-      } catch (err) {
-        console.error("API failed, using static products");
-        setProducts(staticShoes);
-      }
-    };
-
-    fetchMenProducts();
   }, []);
 
   return (
     <>
-      {/* MEN HERO SPLIT BANNER */}
+      {/* MEN HERO */}
       <section className="men-hero-split">
         <div className="men-hero-half left">
           <img src="/Images/men-banner1.jpg" alt="Men street lifestyle" />
@@ -71,15 +81,10 @@ const Men = () => {
         </div>
       </section>
 
-      {/* MEN PRODUCTS SECTION */}
+      {/* MEN PRODUCTS */}
       <section id="men-footwear" className="men container">
         <div className="men-header">
-          <h1>Men’s Footwear</h1>
-
-          <div className="men-actions">
-            <span>Hide Filters</span>
-            <span>Sort By</span>
-          </div>
+          <h1>Men's Footwear</h1>
         </div>
 
         <p className="men-subtext">
@@ -87,14 +92,16 @@ const Men = () => {
         </p>
 
         <div className="men-grid">
-          {products.map((shoe, index) => (
-            <div className="men-card" key={index}>
-              <img
-                src={shoe.isApi ? shoe.img : `/Images/${shoe.img}`}
-                alt={shoe.title}
-              />
+          {products.map((shoe) => (
+            <div
+              key={shoe.id}
+              className="men-card"
+              onClick={() => onSelectProduct(shoe, "Men")}   // ✅ IMPORTANT
+              style={{ cursor: "pointer" }}
+            >
+              <img src={`/Images/${shoe.img}`} alt={shoe.title} />
               <h3>{shoe.title}</h3>
-              <p>Men’s Shoes</p>
+              <p>{shoe.category}</p>
               <strong>{shoe.price}</strong>
             </div>
           ))}

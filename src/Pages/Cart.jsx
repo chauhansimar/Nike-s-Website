@@ -1,31 +1,83 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
-import "../styles/cart.css"; // optional but recommended
+import "../styles/Cart.css";
 
-const Cart = () => {
+const Cart = ({ setSelectedProduct }) => {
   const { cart, removeFromCart } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const totalPrice = cart.reduce((acc, item) => {
+    const price = parseInt(item.price.replace(/[^\d]/g, ""));
+    return acc + price;
+  }, 0);
+
+  const openProduct = (product) => {
+    setSelectedProduct(product);
+    navigate("/");
+  };
 
   return (
-    <section className="cart-page">
-      <h1>Your Cart 🛒</h1>
+    <div className="cart-container">
+
+      <button
+        className="cart-back-btn"
+        onClick={() => navigate(-1)}
+      >
+        ← Back
+      </button>
+
+      <h1>Your Bag</h1>
 
       {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <p className="empty-cart">Your bag is empty.</p>
       ) : (
-        cart.map((item) => (
-          <div className="cart-item" key={item.productId}>
-            <div>
-              <p><b>Product ID:</b> {item.productId}</p>
-              <p><b>Quantity:</b> {item.quantity}</p>
-            </div>
+        <>
+          <div className="cart-items">
+            {cart.map((item) => (
+              <div key={item.cartId} className="cart-item">
 
-            <button onClick={() => removeFromCart(item.productId)}>
-              Remove
+                <img
+                  src={item.isApi ? item.img : `/Images/${item.img}`}
+                  alt={item.title}
+                  onClick={() => openProduct(item)}
+                  style={{ cursor: "pointer" }}
+                />
+
+                <div className="cart-details">
+                  <h3
+                    onClick={() => openProduct(item)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {item.title}
+                  </h3>
+
+                  <p className="brand">Nike</p>
+                  <p className="size">Size: {item.selectedSize}</p>
+                  <p className="price">{item.price}</p>
+
+                  <button
+                    className="remove-btn"
+                    onClick={() => removeFromCart(item.cartId)}
+                  >
+                    Remove
+                  </button>
+                </div>
+
+              </div>
+            ))}
+          </div>
+
+          <div className="cart-summary">
+            <h2>Summary</h2>
+            <p>Total: ₹{totalPrice}</p>
+            <button className="checkout-btn">
+              Checkout
             </button>
           </div>
-        ))
+        </>
       )}
-    </section>
+    </div>
   );
 };
 

@@ -26,7 +26,7 @@
   height: 120%;
   object-fit: cover;
   filter: brightness(1.05) contrast(1.05);
-  transition: transform 1.6s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 /* HOVER MOTION */
@@ -116,13 +116,14 @@
 
 .kids-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3,1fr);
   gap: 60px;
 }
 
 /* PRODUCT CARD */
 .kids-card {
   cursor: pointer;
+    padding: 16px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -133,7 +134,7 @@
 }
 
 .kids-card:hover img {
-  transform: scale(1.08);
+  transform: scale(1.00);
 }
 
 .kids-card:hover {

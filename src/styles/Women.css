@@ -31,7 +31,8 @@
 
 /* HOVER MOTION */
 .women-hero-half:hover img {
-  transform: scale(1.08);
+  transform: scale(1
+  .08);
 }
 
 /* SUBTLE OVERLAY */
@@ -126,12 +127,13 @@
 /* GRID */
 .women-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3,1fr);
   gap: 64px;
 }
 
 /* CARD */
 .women-card {
+    padding: 16px;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -143,7 +145,7 @@
 }
 
 .women-card h3 {
-  margin: 10px 0 4px;
+  margin: 20px 0 4px;
 }
 
 .women-card p {
@@ -157,11 +159,11 @@
 
 /* HOVER EFFECT */
 .women-card:hover img {
-  transform: scale(1.08);
+  transform: scale(1.00);
 }
 
 .women-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-2px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
