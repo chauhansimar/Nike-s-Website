@@ -22,7 +22,7 @@ const HeroSection = () => {
       </div>
 
       <div className="nike-hero-content">
-        <span className="nike-hero-tag">ATHLETIC INNOVATION</span>
+        <span className="nike-hero-tag">ATHLETIC BUILD</span>
 
         <h1 className="nike-hero-title">
           ‘ POWER IN EVERY STEP.’
