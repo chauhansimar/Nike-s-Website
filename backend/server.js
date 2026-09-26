@@ -1,18 +1,20 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-require("dotenv").config();
 
 const app = express();
 
-// ✅ IMPORT ROUTES
+// ==================
+// IMPORT ROUTES
+// ==================
 const contactRoute = require("./routes/ContactRoute");
 const authRoutes = require("./routes/authRoutes");
 const wishlistRoutes = require("./routes/WishlistRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const orderRoutes = require("./routes/orderRoutes");
-
+const chatRoutes = require("./routes/chatRoutes");  // ✅ ADDED CHAT ROUTE
 
 // ==================
 // MIDDLEWARE
@@ -27,8 +29,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
-app.use("/api/contact", contactRoute); 
-app.use("/api/order", orderRoutes);  // ✅ ADDED HERE
+app.use("/api/contact", contactRoute);
+app.use("/api/chat", chatRoutes);  // ✅ CHAT ENDPOINT
 
 // ==================
 // MONGODB CONNECTION
@@ -40,7 +42,6 @@ mongoose
     console.error("MongoDB connection failed ❌", err.message);
     process.exit(1);
   });
-  
 
 // ==================
 // TEST ROUTE

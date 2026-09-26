@@ -2,6 +2,7 @@ const HeroSection = () => {
 
   const scrollToFootwear = () => {
     const footwearSection = document.getElementById("men-footwear");
+    
     if (footwearSection) {
       footwearSection.scrollIntoView({ behavior: "smooth" });
     }

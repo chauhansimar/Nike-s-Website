@@ -4,11 +4,9 @@ export const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(() => {
-    const saved = localStorage.getItem("cart");
-    return saved ? JSON.parse(saved) : [];
+    return JSON.parse(localStorage.getItem("cart")) || [];
   });
 
-  // 🔥 Save cart to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
@@ -28,9 +26,13 @@ const CartProvider = ({ children }) => {
     );
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart }}
+      value={{ cart, addToCart, removeFromCart, clearCart }}
     >
       {children}
     </CartContext.Provider>

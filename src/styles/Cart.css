@@ -233,3 +233,146 @@
 .back-btn:hover {
   opacity: 0.8;
 }
+
+/* ================= PAGE WRAPPER ================= */
+.cart-page {
+  padding: 80px 120px;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* ================= BACK BUTTON ================= */
+.cart-back-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.cart-back-btn:hover {
+  color: #000;
+}
+
+/* ================= TITLE ================= */
+.cart-title {
+  margin-bottom: 40px;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* ================= MAIN LAYOUT ================= */
+.cart-content {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+/* ================= LEFT SIDE ================= */
+.cart-items {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* ================= CARD ================= */
+.cart-card {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.cart-card img {
+  width: 120px;
+  object-fit: contain;
+}
+
+.cart-info {
+  flex: 1;
+}
+
+.cart-info h3 {
+  margin-bottom: 8px;
+}
+
+.cart-info p {
+  margin-bottom: 6px;
+  color: #555;
+}
+
+/* ================= REMOVE BUTTON ================= */
+.remove-btn {
+  background: #eee;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.remove-btn:hover {
+  background: #111;
+  color: #fff;
+}
+
+/* ================= SUMMARY ================= */
+.cart-summary {
+  flex: 1;
+  background: #fff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.cart-summary h2 {
+  margin-bottom: 20px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* ================= CHECKOUT ================= */
+.checkout-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 999px;
+  border: none;
+  background: #111;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.checkout-btn:hover {
+  background: #000;
+  transform: translateY(-2px);
+}
+
+/* ================= EMPTY ================= */
+.empty-cart {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.empty-cart button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: none;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+}

@@ -33,6 +33,57 @@ const ProductPage = ({ product, goBack }) => {
     alert("Added to Bag ✅");
   };
 
+  const addToWishlist = async () => {
+
+  try {
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Please login first ❌");
+      return;
+    }
+
+    const res = await fetch(
+      "http://localhost:5000/api/wishlist",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+
+          Authorization: `Bearer ${token}`,
+        },
+
+        body: JSON.stringify({
+          productId: product.id,
+          name: product.title,
+          price: product.price,
+
+          image: product.isApi
+            ? product.img
+            : `/Images/${product.img}`,
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("Added to Wishlist ❤️");
+    } else {
+      alert(data.message);
+    }
+
+    console.log(data);
+
+  } catch (error) {
+
+    console.log(error);
+
+    alert("Something went wrong ❌");
+  }
+};
   return (
     <div className="pdp">
 
@@ -88,6 +139,13 @@ const ProductPage = ({ product, goBack }) => {
         <button className="add-to-cart" onClick={handleAddToCart}>
           Add to Bag
         </button>
+        {/* WISHLIST BUTTON */}
+<button
+  className="wishlist-btn"
+  onClick={addToWishlist}
+>
+  ♡ Add to Wishlist
+</button>
 
         {/* DESCRIPTION */}
         <div className="product-description">

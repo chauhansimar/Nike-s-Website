@@ -1,50 +1,112 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/Cart.css";
+import "../styles/Orders.css";
 
 const MyOrders = () => {
-  const [cartItems, setCartItems] = useState([]);
+  const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const saved =
-      JSON.parse(localStorage.getItem("cart")) || [];
-    setCartItems(saved);
+      JSON.parse(localStorage.getItem("orders")) || [];
+    setOrders(saved.reverse());
   }, []);
 
-  return (
-    <div className="cart-container">
+  const handleDeleteOrder = (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this order?"
+    );
 
-      {/* 🔙 Short Back Button */}
+    if (!confirmDelete) return;
+
+    const updatedOrders = orders.filter(
+      (order) => order.id !== id
+    );
+
+    setOrders(updatedOrders);
+
+    localStorage.setItem(
+      "orders",
+      JSON.stringify(updatedOrders.reverse())
+    );
+  };
+
+  return (
+    <div className="orders-page">
+
       <button
-        className="back-btn"
+        className="orders-back-btn"
         onClick={() => navigate("/")}
       >
-        ← Back
+        ← Continue Shopping
       </button>
 
-      <h1>📦 My Orders</h1>
+      <h1 className="orders-title">My Orders</h1>
 
-      {cartItems.length === 0 ? (
-        <p>Your list is empty.</p>
+      {orders.length === 0 ? (
+        <div className="orders-empty">
+          <p>No orders placed yet.</p>
+          <button onClick={() => navigate("/")}>
+            Start Shopping
+          </button>
+        </div>
       ) : (
-        <div className="cart-grid">
-          {cartItems.map((item) => (
+        <div className="orders-container">
+          {orders.map((order) => (
             <div
-              className="cart-card"
-              key={item.cartId}
+              key={order.id}
+              className="order-card"
             >
-              <img
-                src={
-                  item.isApi
-                    ? item.image
-                    : `/Images/${item.img}`
-                }
-                alt={item.title || item.name}
-              />
+              {/* ORDER HEADER */}
+              <div className="order-header">
 
-              <h3>{item.title || item.name}</h3>
-              <p>{item.price}</p>
+                <div>
+                  <p className="order-date">
+                    Order Date: {order.date}
+                  </p>
+                  <p className="order-id">
+                    Order ID: #{order.id}
+                  </p>
+                </div>
+
+                <div className="order-actions">
+                  <span className="order-total">
+                    ₹{order.total}
+                  </span>
+
+                  <button
+                    className="delete-order-btn"
+                    onClick={() =>
+                      handleDeleteOrder(order.id)
+                    }
+                  >
+                    Delete
+                  </button>
+                </div>
+
+              </div>
+
+              {/* ITEMS */}
+              <div className="order-items">
+                {order.items?.map((item) => (
+                  <div
+                    key={item.cartId}
+                    className="order-item"
+                  >
+                    <img
+                      src={`/Images/${item.img}`}
+                      alt={item.title}
+                    />
+
+                    <div className="order-info">
+                      <h4>{item.title}</h4>
+                      <p>{item.price}</p>
+                      <p>Size: {item.selectedSize}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
             </div>
           ))}
         </div>

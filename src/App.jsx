@@ -1,27 +1,19 @@
 import "./App.css";
 import "./styles/Sale.css";
-import Admin from "./Pages/Admin";
-import Signup from "./Pages/Signup";
-import ProtectedRoute from "./Components/ProtectedRoute";
-import PublicRoute from "./Components/PublicRoute";
-import WishlistProvider from "./context/WishlistContext";
-import MyOrders from "./Pages/MyOrders";
-
-
-  
-
 
 import {
   BrowserRouter as Router,
-  Routes,   
+  Routes,
   Route,
   useLocation,
 } from "react-router-dom";
+
 import { useState } from "react";
 
 /* COMPONENTS */
 import Navigation from "./Components/Navigation";
 import HeroSection from "./Components/Hero";
+import ChatBot from "./Components/Chatbot";
 
 /* PAGES */
 import Sale from "./Pages/Sale";
@@ -30,10 +22,13 @@ import Women from "./Pages/Women";
 import Kids from "./Pages/Kids";
 import Contact from "./Pages/Contact";
 import Login from "./Pages/Login";
-import Footer from "./Pages/Footer";
+import Signup from "./Pages/Signup";
+import Admin from "./Pages/Admin";
 import Wishlist from "./Pages/Wishlist";
 import Cart from "./Pages/Cart";
 import ProductPage from "./Pages/ProductPage";
+import MyOrders from "./Pages/MyOrders";
+import Footer from "./Pages/Footer";
 
 /* CONTEXT */
 import CartProvider from "./context/CartContext";
@@ -76,14 +71,12 @@ const AppLayout = ({
   selectedProduct,
   sourceSection,
   setSelectedProduct,
-  
 }) => {
   const location = useLocation();
 
   const goBack = () => {
     setSelectedProduct(null);
 
-    // scroll to the section where product was clicked
     setTimeout(() => {
       if (sourceSection) {
         const sectionEl = document.getElementById(sourceSection);
@@ -99,45 +92,44 @@ const AppLayout = ({
 
   return (
     <>
+      {/* Hide Navbar on login page */}
       {location.pathname !== "/login" && <Navigation />}
 
-  <Routes>
-  <Route
-    path="/"
-    element={
-      selectedProduct ? (
-        <ProductPage
-          product={selectedProduct}
-          goBack={goBack}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            selectedProduct ? (
+              <ProductPage
+                product={selectedProduct}
+                goBack={goBack}
+              />
+            ) : (
+              <Home onSelectProduct={setSelectedProduct} />
+            )
+          }
         />
-      ) : (
-        <Home onSelectProduct={setSelectedProduct} />
-      )
-    }
-  />
 
-  <Route path="/login" element={<Login />} />
-  <Route path="/signup" element={<Signup />} />
-  <Route path="/admin" element={<Admin />} />
-  <Route path="/my-orders" element={<MyOrders />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/my-orders" element={<MyOrders />} />
 
-  
+        <Route
+          path="/wishlist"
+          element={
+            <Wishlist
+              wishlist={wishlist}
+              removeFromWishlist={removeFromWishlist}
+            />
+          }
+        />
 
-  <Route
-    path="/wishlist"
-    element={
-      <Wishlist
-        wishlist={wishlist}
-        removeFromWishlist={removeFromWishlist}
-      />
-    }
-  />
+        <Route path="/cart" element={<Cart />} />
+      </Routes>
 
-  <Route path="/cart" element={<Cart />} />
-  <Route path="/signup" element={<div>Signup Working</div>} />
-
-</Routes>
-
+      {/* 🔥 Chatbot appears on all pages */}
+      <ChatBot />
     </>
   );
 };
@@ -149,12 +141,14 @@ const App = () => {
   const [sourceSection, setSourceSection] = useState(null);
 
   const handleSelectProduct = (product, section) => {
-    setSourceSection(section);   // ✅ remember source
+    setSourceSection(section);
     setSelectedProduct(product);
   };
 
   const removeFromWishlist = (id) => {
-    setWishlist((prev) => prev.filter((item) => item.id !== id));
+    setWishlist((prev) =>
+      prev.filter((item) => item.id !== id)
+    );
   };
 
   return (

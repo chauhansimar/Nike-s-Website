@@ -1,81 +1,116 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
 import "../styles/Cart.css";
 
-const Cart = ({ setSelectedProduct }) => {
-  const { cart, removeFromCart } = useContext(CartContext);
+const Cart = () => {
+  const { cart, removeFromCart, clearCart } =
+    useContext(CartContext);
   const navigate = useNavigate();
 
-  const totalPrice = cart.reduce((acc, item) => {
-    const price = parseInt(item.price.replace(/[^\d]/g, ""));
+  const total = cart.reduce((acc, item) => {
+    const price = parseInt(
+      item.price.replace(/[^\d]/g, "")
+    );
     return acc + price;
   }, 0);
 
-  const openProduct = (product) => {
-    setSelectedProduct(product);
-    navigate("/");
+  const handleCheckout = () => {
+    if (!cart.length) return;
+
+    const existingOrders =
+      JSON.parse(localStorage.getItem("orders")) || [];
+
+    const updatedOrders = [
+      ...existingOrders,
+      {
+        id: Date.now(),
+        items: cart,
+        total,
+        date: new Date().toLocaleString(),
+      },
+    ];
+
+    localStorage.setItem(
+      "orders",
+      JSON.stringify(updatedOrders)
+    );
+
+    clearCart();
+    navigate("/my-orders");
   };
 
   return (
-    <div className="cart-container">
+    <div className="cart-page">
 
+      {/* 🔙 Back Button */}
       <button
         className="cart-back-btn"
-        onClick={() => navigate(-1)}
+        onClick={() => navigate("/")}
       >
-        ← Back
+        ← Continue Shopping
       </button>
 
-      <h1>Your Bag</h1>
+      <h1 className="cart-title">My Cart</h1>
 
       {cart.length === 0 ? (
-        <p className="empty-cart">Your bag is empty.</p>
+        <div className="empty-cart">
+          <p>Your cart is empty.</p>
+          <button onClick={() => navigate("/")}>
+            Go Shopping
+          </button>
+        </div>
       ) : (
-        <>
+        <div className="cart-content">
+
+          {/* LEFT SIDE ITEMS */}
           <div className="cart-items">
             {cart.map((item) => (
-              <div key={item.cartId} className="cart-item">
-
+              <div
+                className="cart-card"
+                key={item.cartId}
+              >
                 <img
-                  src={item.isApi ? item.img : `/Images/${item.img}`}
+                  src={`/Images/${item.img}`}
                   alt={item.title}
-                  onClick={() => openProduct(item)}
-                  style={{ cursor: "pointer" }}
                 />
 
-                <div className="cart-details">
-                  <h3
-                    onClick={() => openProduct(item)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    {item.title}
-                  </h3>
-
-                  <p className="brand">Nike</p>
-                  <p className="size">Size: {item.selectedSize}</p>
-                  <p className="price">{item.price}</p>
-
-                  <button
-                    className="remove-btn"
-                    onClick={() => removeFromCart(item.cartId)}
-                  >
-                    Remove
-                  </button>
+                <div className="cart-info">
+                  <h3>{item.title}</h3>
+                  <p>{item.price}</p>
+                  <p>Size: {item.selectedSize}</p>
                 </div>
 
+                <button
+                  className="remove-btn"
+                  onClick={() =>
+                    removeFromCart(item.cartId)
+                  }
+                >
+                  Remove
+                </button>
               </div>
             ))}
           </div>
 
+          {/* RIGHT SIDE SUMMARY */}
           <div className="cart-summary">
-            <h2>Summary</h2>
-            <p>Total: ₹{totalPrice}</p>
-            <button className="checkout-btn">
+            <h2>Order Summary</h2>
+
+            <div className="summary-row">
+              <span>Total</span>
+              <span>₹{total}</span>
+            </div>
+
+            <button
+              className="checkout-btn"
+              onClick={handleCheckout}
+            >
               Checkout
             </button>
           </div>
-        </>
+
+        </div>
       )}
     </div>
   );

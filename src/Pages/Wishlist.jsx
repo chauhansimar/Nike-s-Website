@@ -1,118 +1,165 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/Wishlist.css";
 
 const Wishlist = () => {
+
   const [items, setItems] = useState([]);
+
   const [loading, setLoading] = useState(true);
+
   const navigate = useNavigate();
 
-  const token = localStorage.getItem("token");
+  // ✅ FETCH WISHLIST FROM BACKEND
+  const fetchWishlist = async () => {
 
-  useEffect(() => {
-    const fetchWishlist = async () => {
-      if (!token) {
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const res = await fetch(
-          "http://localhost:5000/api/wishlist",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (!res.ok) {
-          throw new Error("Unauthorized or server error");
-        }
-
-        const data = await res.json();
-        setItems(Array.isArray(data) ? data : []);
-      } catch (error) {
-        console.error("Wishlist fetch error:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchWishlist();
-  }, [token]);
-
-  const removeItem = async (id) => {
     try {
-      await fetch(
-        `http://localhost:5000/api/wishlist/${id}`,
+
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        "http://localhost:5000/api/wishlist",
         {
-          method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
 
-      setItems((prev) =>
-        prev.filter((item) => item._id !== id)
-      );
+      const data = await response.json();
+
+      if (response.ok) {
+        setItems(data);
+      } else {
+        alert(data.message);
+      }
+
     } catch (error) {
-      console.error("Remove error:", error);
+
+      console.log(error);
+
+    } finally {
+
+      setLoading(false);
+
     }
   };
 
-  // 🔐 If not logged in → show message (no redirect)
-  if (!token) {
-    return (
-      <div className="wishlist-container">
-        <h1>❤️ Wishlist</h1>
-        <p>Please login to view your wishlist.</p>
-        <button onClick={() => navigate("/login")}>
-          Go to Login
-        </button>
-      </div>
-    );
-  }
+  // ✅ REMOVE ITEM
+  const removeItem = async (id) => {
 
-  if (loading) {
-    return (
-      <div className="wishlist-container">
-        <h1>❤️ Wishlist</h1>
-        <p>Loading...</p>
-      </div>
-    );
-  }
+    try {
+
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `http://localhost:5000/api/wishlist/${id}`,
+        {
+          method: "DELETE",
+
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+
+        setItems(
+          items.filter((item) => item._id !== id)
+        );
+
+      } else {
+
+        alert(data.message);
+
+      }
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+  };
+
+  useEffect(() => {
+
+    fetchWishlist();
+
+  }, []);
 
   return (
-    <div className="wishlist-container">
-      <h1>❤️ Wishlist</h1>
+    <div className="wishlist-page">
 
-      {items.length === 0 ? (
-        <p>Your wishlist is empty.</p>
+      {/* BACK BUTTON */}
+      <button
+        className="wishlist-back-btn"
+        onClick={() => navigate("/")}
+      >
+        ← Continue Shopping
+      </button>
+
+      <h1 className="wishlist-title">
+        My Wishlist
+      </h1>
+
+      {loading ? (
+
+        <p>Loading...</p>
+
+      ) : items.length === 0 ? (
+
+        <div className="wishlist-empty">
+
+          <p>Your wishlist is empty.</p>
+
+          <button onClick={() => navigate("/")}>
+            Start Shopping
+          </button>
+
+        </div>
+
       ) : (
+
         <div className="wishlist-grid">
+
           {items.map((item) => (
+
             <div
-              className="wishlist-card"
               key={item._id}
+              className="wishlist-card"
             >
+
               <img
                 src={item.image}
                 alt={item.name}
               />
-              <h3>{item.name}</h3>
-              <p>₹{item.price}</p>
+
+              <div className="wishlist-info">
+
+                <h3>{item.name}</h3>
+
+                <p>₹{item.price}</p>
+
+              </div>
 
               <button
+                className="wishlist-remove-btn"
                 onClick={() =>
                   removeItem(item._id)
                 }
               >
                 Remove
               </button>
+
             </div>
+
           ))}
+
         </div>
+
       )}
     </div>
   );
